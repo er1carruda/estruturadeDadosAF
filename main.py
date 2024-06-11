@@ -20,7 +20,7 @@ class FilaDePedidos:
             print("Nenhum pedido na fila.")
         else:
             for pedido in self.fila:
-                print(f"Pedido: {pedido.numero}, Descrição: {pedido.descricao}")
+                print(f"---------\nCliente: {pedido.nome} \nPedido: {pedido.numero} \nDescrição: {pedido.descricao} \nEndereço: {pedido.endereco} \nTelefone: {pedido.telefone}")
 
 def mostrar_menu():
     print("\nMenu:")
@@ -41,14 +41,17 @@ while True:
     if opcao == "1":
         numero = int(input("Número do pedido: "))
         descricao = input("Descrição do pedido: ")
-        novo_pedido = Pedido(numero, descricao)
+        nome = input("Nome do Cliente: ")
+        endereco = input("Endereço: ")
+        telefone = input("Telefone de contato: ")
+        novo_pedido = Pedido(numero, descricao, nome, endereco, telefone)
         arvore.insert(novo_pedido.numero)
         fila.adicionar_pedido(novo_pedido)
         print("Pedido adicionado com sucesso.")
     elif opcao == "2":
         pedido_processado = fila.processar_pedido()
         if pedido_processado:
-            print(f"Processando pedido: {pedido_processado.numero} - {pedido_processado.descricao}")
+            print(f"Processando pedido de {pedido_processado.nome}: {pedido_processado.numero} - {pedido_processado.descricao} ")
     elif opcao == "3":
         fila.exibir_fila()
     elif opcao == "4":
