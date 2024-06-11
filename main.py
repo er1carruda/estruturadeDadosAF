@@ -1,46 +1,6 @@
-class Pedido:
-    def __init__(self, numero, descricao):
-        self.numero = numero
-        self.descricao = descricao
+from BinaryTree import BinaryTree
+from pedido import Pedido
 
-class Nodo:
-    def __init__(self, pedido):
-        self.pedido = pedido
-        self.esquerda = None
-        self.direita = None
-
-class ArvoreBinariaDeBusca:
-    def __init__(self):
-        self.raiz = None
-    
-    def adicionar_pedido(self, pedido):
-        if not self.raiz:
-            self.raiz = Nodo(pedido)
-        else:
-            self._adicionar(self.raiz, pedido)
-    
-    def _adicionar(self, nodo, pedido):
-        if pedido.numero < nodo.pedido.numero:
-            if nodo.esquerda is None:
-                nodo.esquerda = Nodo(pedido)
-            else:
-                self._adicionar(nodo.esquerda, pedido)
-        else:
-            if nodo.direita is None:
-                nodo.direita = Nodo(pedido)
-            else:
-                self._adicionar(nodo.direita, pedido)
-    
-    def buscar_pedido(self, numero):
-        return self._buscar(self.raiz, numero)
-    
-    def _buscar(self, nodo, numero):
-        if nodo is None or nodo.pedido.numero == numero:
-            return nodo
-        if numero < nodo.pedido.numero:
-            return self._buscar(nodo.esquerda, numero)
-        else:
-            return self._buscar(nodo.direita, numero)
 
 class FilaDePedidos:
     def __init__(self):
@@ -62,30 +22,40 @@ class FilaDePedidos:
             for pedido in self.fila:
                 print(f"Pedido: {pedido.numero}, Descrição: {pedido.descricao}")
 
-# Exemplo de uso
-arvore = ArvoreBinariaDeBusca()
+def mostrar_menu():
+    print("\nMenu:")
+    print("1. Receber novo pedido")
+    print("2. Finalizar próximo pedido")
+    print("3. Verificar fila de pedidos")
+    print("4. Exibir pedidos em ordem crescente")
+    print("5. Sair")
+
+
+arvore = BinaryTree()
 fila = FilaDePedidos()
 
-pedido1 = Pedido(101, "Pizza Margherita")
-pedido2 = Pedido(102, "Hambúrguer")
-pedido3 = Pedido(103, "Sushi")
+while True:
+    mostrar_menu()
+    opcao = input("Escolha uma opção: ")
 
-arvore.adicionar_pedido(pedido1)
-arvore.adicionar_pedido(pedido2)
-arvore.adicionar_pedido(pedido3)
-
-fila.adicionar_pedido(pedido1)
-fila.adicionar_pedido(pedido2)
-fila.adicionar_pedido(pedido3)
-
-fila.exibir_fila()
-
-pedido_processado = fila.processar_pedido()
-if pedido_processado:
-    print(f"Processando pedido: {pedido_processado.numero} - {pedido_processado.descricao}")
-
-fila.exibir_fila()
-
-pedido_buscado = arvore.buscar_pedido(102)
-if pedido_buscado:
-    print(f"Pedido encontrado: {pedido_buscado.pedido.numero} - {pedido_buscado.pedido.descricao}")
+    if opcao == "1":
+        numero = int(input("Número do pedido: "))
+        descricao = input("Descrição do pedido: ")
+        novo_pedido = Pedido(numero, descricao)
+        arvore.insert(novo_pedido.numero)
+        fila.adicionar_pedido(novo_pedido)
+        print("Pedido adicionado com sucesso.")
+    elif opcao == "2":
+        pedido_processado = fila.processar_pedido()
+        if pedido_processado:
+            print(f"Processando pedido: {pedido_processado.numero} - {pedido_processado.descricao}")
+    elif opcao == "3":
+        fila.exibir_fila()
+    elif opcao == "4":
+        print("Pedidos em ordem crescente:")
+        arvore.inorder()
+    elif opcao == "5":
+        print("Saindo...")
+        break
+    else:
+        print("Opção inválida. Tente novamente.")
