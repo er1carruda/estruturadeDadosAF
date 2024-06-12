@@ -9,5 +9,5 @@ Nosso projeto consiste numa fila de pedidos para restaurante, respeitando a orde
 A lista nos auxilia a corresponder a ordem de chegada dos clientes, adicionando sequencialmente os pedidos e permitindo finalizar o próximo da lista.
 ## Estruturas utilizadas
 
-Foram utilizadas as estruturas de Árvore e Lista.
+Foram utilizadas as estruturas de Árvore e Fila.
 
