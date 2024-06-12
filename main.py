@@ -27,8 +27,7 @@ def mostrar_menu():
     print("1. Receber novo pedido")
     print("2. Finalizar próximo pedido")
     print("3. Verificar fila de pedidos")
-    print("4. Exibir pedidos em ordem crescente")
-    print("5. Sair")
+    print("4. Sair")
 
 
 arvore = BinaryTree()
@@ -55,9 +54,6 @@ while True:
     elif opcao == "3":
         fila.exibir_fila()
     elif opcao == "4":
-        print("Pedidos em ordem crescente:")
-        arvore.inorder()
-    elif opcao == "5":
         print("Saindo...")
         break
     else:
